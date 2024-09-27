@@ -1,25 +1,77 @@
-#Documentacion 
+# Definiendo el proyecto 'Vanilla Games'
 
-Vanilla Games S.L. es una empresa de desarrollo de minijuegos para navegadores web, creados con vanillaJS, es decir, desarrollados exclusivamente con Javascript como lenguaje de programación (sin frameworks)
+## Escenario del proyecto
 
-En esta empresa trabajan 10 desarrolladores y, habitualmente, suelen tener a tres alumnos/as en prácticas, de los cuales, al menos uno, tendrá muchas posibilidades de formar parte del equipo de desarrollo al acabar su etapa de formación.
+**Vanilla Games S.L.** es una empresa dedicada al desarrollo de minijuegos para navegadores web, utilizando **vanillaJS** (Javascript puro, sin frameworks). 
 
-El método de trabajo que se utiliza en dicha empresa consiste en proponer a cada uno de los miembros del equipo el desarrollo de un minijuego que, al acabar, deberán compartir con el resto de sus compañeros. Estos, a su vez, deben comentar y valorar cada una de las propuestas. Finalmente, en la empresa hay un equipo responsable de seleccionar aquellas propuestas que muestran un mayor potencial, para ser desarrolladas de manera definitiva por todo el equipo de trabajo, con el fin de crear una aplicación para su posterior comercialización.
+El equipo está compuesto por 10 desarrolladores y, habitualmente, tres alumnos/as en prácticas, de los cuales al menos uno tiene buenas posibilidades de unirse al equipo al finalizar su formación.
 
-Hasta la fecha, para el proceso de publicación de proyectos, comentarios y valoración utilizaban algunas herramientas ofimáticas, tipo hoja de cálculo de google. Actualmente pretenden crear una aplicación web tipo intranet para llevar a cabo este propósito.
+### Metodología de trabajo
 
-Como alumno en prácticas, tu trabajo consiste en crear una aplicación web que permitirá a los desarrolladores de Vanilla Games, publicar sus propuestas de minijuegos, de manera que el resto de compañeros podrá hacer comentarios y emitir una valoración de cada proyecto publicado en esta plataforma.
+Cada miembro del equipo propone un minijuego, el cual se comparte con los demás para su comentario y valoración. Un equipo especializado selecciona las propuestas con mayor potencial para ser desarrolladas y comercializadas.
 
-Casos de uso para la V1.0 - Definición básica
-Registrar usuario: Un usuario puede registrarse en la plataforma proporcionando su nombre, apellidos, email y contraseña.
-Recuperar contraseña: Un usuario registrado puede solicitar la recuperación de su contraseña en caso de que la haya olvidado. Para ello, se le enviará un correo electrónico con las instrucciones para restablecer su contraseña.
-Iniciar sesión: Un usuario registrado puede iniciar sesión en la plataforma proporcionando su email y contraseña.
-Cerrar sesión: Un usuario puede cerrar su sesión en la plataforma en cualquier momento.
-Editar perfil: Un usuario registrado puede editar su perfil, actualizando su nombre, apellidos, email o contraseña.
-Ver proyectos: Un usuario registrado puede ver un listado de proyectos publicados por los desarrolladores.
-Publicar proyecto: Un usuario con el perfil de desarrollador puede publicar un proyecto proporcionando información como nombre, descripción, imagen representativa, enlaces a servidor de pruebas y repositorio de código, estado del proyecto, etc.
-Editar proyecto: Un usuario con el perfil de desarrollador puede editar un proyecto que haya publicado previamente, actualizando la información del proyecto.
-Eliminar proyecto: Un usuario con el perfil de desarrollador puede eliminar un proyecto que haya publicado previamente.
-Ver/Editar usuarios: Un adminsrador puede ver una tabla con todos los usuarios que hay registrados y editar la información, incluido el ROL de usuario.
-Eliminar usuario: Un administrador puede eliminar cualquier usuario registrado en la plataforma.
-![alt text](image.png)
+Hasta ahora, la gestión de propuestas, comentarios y valoraciones se hacía con herramientas ofimáticas. Actualmente, el objetivo es crear una aplicación web tipo intranet para facilitar este proceso.
+
+## Requisitos del proyecto y casos de uso general
+
+Los **casos de uso** describen las interacciones entre el sistema y sus usuarios, ayudando a entender cómo interactúan con la aplicación y qué esperan obtener.
+
+### Casos de uso generales
+
+La aplicación debe permitir que los usuarios:
+
+-**Registro e inicio de sesión**: Los usuarios pueden registrarse con su nombre, apellidos, email y contraseña. Una vez registrados, pueden iniciar y cerrar sesión.
+-**Listar proyectos**: Los usuarios registrados pueden ver un listado de proyectos publicados por los desarrolladores.
+- **Editar perfil**: Los usuarios pueden editar su perfil y subir una imagen de avatar.
+
+**Para usuarios con perfil de 'desarrollador'**:
+
+-**Publicar proyectos**: Los desarrolladores pueden crear proyectos con información como nombre, descripción, imagen representativa, enlaces al proyecto y repositorio, y el estado del proyecto. También pueden editar o eliminar sus proyectos.
+-**Comentarios y valoraciones**: Pueden comentar sobre los proyectos publicados y añadir valoraciones en forma de estrellas.
+
+**Para el administrador**:
+
+-**Gestión de usuarios**: El administrador puede gestionar perfiles de usuarios, modificando o eliminando cuentas y cambiando roles.
+- **Control de comentarios**: Tiene control total sobre los comentarios y valoraciones.
+
+# Casos de Uso para la V1.0 - Definición Básica
+
+## 1. Registrar Usuario
+Un usuario puede registrarse en la plataforma proporcionando su **nombre**, **apellidos**, **email** y **contraseña**.
+
+## 2. Recuperar Contraseña
+Un usuario registrado puede solicitar la recuperación de su contraseña en caso de que la haya olvidado. Para ello, se le enviará un **correo electrónico** con las instrucciones para restablecer su contraseña.
+
+## 3. Iniciar Sesión
+Un usuario registrado puede iniciar sesión en la plataforma proporcionando su **email** y **contraseña**.
+
+## 4. Cerrar Sesión
+Un usuario puede cerrar su sesión en la plataforma en cualquier momento.
+
+## 5. Editar Perfil
+Un usuario registrado puede editar su perfil, actualizando su **nombre**, **apellidos**, **email** o **contraseña**.
+
+## 6. Ver Proyectos
+Un usuario registrado puede ver un listado de **proyectos** publicados por los desarrolladores.
+
+## 7. Publicar Proyecto
+Un usuario con el perfil de **desarrollador** puede publicar un proyecto proporcionando información como:
+- **Nombre** del proyecto
+- **Descripción**
+- **Imagen representativa**
+- **Enlaces** a servidor de pruebas y repositorio de código
+- **Estado** del proyecto
+
+## 8. Editar Proyecto
+Un usuario con el perfil de **desarrollador** puede editar un proyecto que haya publicado previamente, actualizando la información del proyecto.
+
+## 9. Eliminar Proyecto
+Un usuario con el perfil de **desarrollador** puede eliminar un proyecto que haya publicado previamente.
+
+## 10. Ver/Editar Usuarios
+Un **administrador** puede ver una tabla con todos los usuarios registrados y editar la información, incluido el **rol** de usuario.
+
+## 11. Eliminar Usuario
+Un **administrador** puede eliminar cualquier usuario registrado en la plataforma.
+
+![alt text](image-1.png);
