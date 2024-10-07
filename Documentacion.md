@@ -77,7 +77,7 @@ Un **administrador** puede eliminar cualquier usuario registrado en la plataform
 ![alt text](image-1.png);
 
 
-##'Documentación: Casos de uso especificos #3
+## Documentación: Casos de uso especificos #3
 
 # Casos de uso específicos y diagramas de flujo
 
