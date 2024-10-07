@@ -271,3 +271,156 @@ En esta versión 1.0, hemos definido los casos de uso generales para cada actor 
 5. **Error de servidor:** 
    - Mensaje: "Se ha producido un error. Por favor, inténtelo de nuevo o contacte con soporte técnico."
 
+
+# Bocetos 
+
+## Diseño de Bocetos
+### Home y menus de usuario
+Hemos didivido la interficie en 3 zonas, el encabezado (header), el cuerpo principal (main) y el pie de página (footer).
+![Alt Text](https://carrebola.github.io/vanillaPill/assets/images/1684861508218-79dad6473fd7d571d5f73e96f893af7f.jpg)
+En el **header** vamos a alojar una barra superior fija con: el **logo** y nombre de la web (que hará las veces de link a la página principal), un **menú central genérico** (para acceder a páginas públicas), un **menú central específico**  (que será diferente en función del rol de usuario logueado), y un icono (avatar) que permitirá ver la imagen del usuario logueado y que hará de botón para desplegar otro menú, el menú de usuario (que tendrá diferentes items dependiendo de si la sesió está abierta o no y del tipo de rol que tenga el usuario logueado).
+El **cuerpo** (main) albergará el contenido de las páginas. Será la sección que vaya cambiando dependiendo de la página que carguemos. En la página home simplemente aparece una imagen de fondo y el nombre de la web.
+El **Footer** será meramente informativo.
+
+### Registro de un usuario
+
+![Alt Text](https://carrebola.github.io/vanillaPill/assets/images/1684861508212-88f1ed0a8c53df9f791872b3b03519d8.jpg)
+
+### Iniciar Sesion
+
+![Alt Text](https://carrebola.github.io/vanillaPill/assets/images/1684861508205-edba4a097ae58ec58f1bb07dc4b7e5e1.jpg)
+
+###Editar mi perfil
+
+![Alt Text](https://carrebola.github.io/vanillaPill/assets/images/1684861508198-5b5eff368d5421682a834f3ed67af5bd.jpg)
+
+Editar perfil será una ventana modal, es decir, se mostrará la ventana y el fondo se volverá oscuro.
+
+Esta ventana de edición permitirá, además de modificar los datos del usuario, **añadir una imagen de avatar**. Por el momento, en esta primera versión, podremos añadir el link de una imagen que esté alojada en un servidor. En la siguiente versión (versión 1.1) actualizaremos esta ventana para que puedan **subirse archivos** (imágenes) al servidor.
+
+### Listado de TODOS los proyectos
+
+En esta página podemos ver, en la pestaña izquierda, todos los proyectos en forma de tabla. La pestaña derecha mostrará solo los proyectos que ha subido el usuario que ha iniciado la sesión.
+
+Al hacer clic en cualquier parte de la fila se accede al detalle del proyecto.
+
+También tenemos un buscador que permite buscar proyectos por palabras clave en el nombre o descripción.
+
+Las celdas de encabezado de las tablas incluyen un icono (flecha hacia arriba o hacia abajo) que permitirá ordenar la tabla por la columna en concreto.
+
+![Alt Text](https://carrebola.github.io/vanillaPill/assets/images/1684861508192-6b771260fe99faccc760b23f71f02406.jpg)
+
+### Listado de MIS Proyectos
+
+En esta pestaña podemos ver los trabajos pertenecientes al usuario logueado. En cada fila aparece, además, un icono para editar y borrar el proyecto correspondiente. Por otro lado tenemos la opción de subir un nuevo proyecto.
+
+<em>Habría que valorar si es mejor crear un único buscador para el nombre y descripción del proyecto o dos barras de busqueda, una para cada sección, tal y como se muestra en el boceto anterior.</em>
+
+![Alt Text](https://carrebola.github.io/vanillaPill/assets/images/1684861508186-f38d99164909a0783d2040ce646e928a.jpg)
+
+### Detalle de un proyecto
+
+Si el usuario que está viendo la información de un proyecto en concreto es el autor de dicho proyecto, aparecerá un icono para la edición del mismo.
+
+![Alt Text](https://carrebola.github.io/vanillaPill/assets/images/1684861508178-ed1f5e41681a1dcee1edac19f807c239.jpg)
+
+### Nuevo proyecto/ Editar Proyecto
+
+Esta vista sirve tanto para crear un nuevo proyecto como para editarlo.
+
+Si el proyecto es nuevo, el botón mostrará el texto <em>ENVIAR</em>, pero si estamos editándolo aparecerá el texto <em>ACTUALIZAR</em>. Al crear o actualizar el proyecto, la web nos reenvía a la vista 'Detalle de proyecto'.
+
+### Panel de administracion de proyectos
+
+Si tienes el rol '**administrador**' aparecerá el item '<em>Panel administración</em>' en el **menú superior específico**. Este item nos permite cargar la vista '**Panel administración de proyectos**'. Desde esta vista también podemos acceder al '<em>Panel administración de usuarios</em>'.
+
+Esta vista permite **editar o borrar** cualquier proyecto haciendo click en los iconos correspondientes. La opción editar nos llevará a la vista '<em>Editar proyecto</em>'
+
+![Alt Text](https://carrebola.github.io/vanillaPill/assets/images/1684861508161-c9cfd413730d67ea74b43e48fedea5ec.jpg)
+
+### Panel de administracion de usuarios
+
+Esta vista permite **editar los datos de los usuarios**. Por supuesto es solo accesible para los administradores.
+
+En esta vista, el método para editar la información es diferentes. Aquí los datos **aparecen sobre 'inputs'**, de manera que al hacer clic sobre ellos, aparecerá el cursor de edición. Se pueden modificar todos los datos (en especial el '<em>estado</em>' y el '<em>rol</em>' del usuario) excepto el email.
+
+![Alt Text](https://carrebola.github.io/vanillaPill/assets/images/1684861508152-04e98cfb1faeecf2a53ea921bdd63ebe.jpg)
+
+# Test de Usuarios inicial
+## Primer Test de Usabilidad
+
+Tal y como hemos comentado en el apartado '<em>Diseño centrado en el usuario</em>', una de las premisas de esta metodología consiste en realizar evaluaciones constantes para detectar los posibles problemas de usabilidad cuanto antes mejor. Por lo que una buena idea es realizar un primer test de usabilidad.
+
+Por el momento os adelanto que la técnica más utilizada par evaluar la usabilidad son los '**tests de usuario**'.
+
+Estos consisten en crear una bateria de acciones que el usuario debe realizar, para detectar si existe algún problema en la interación con la aplicación. A continuación vamos pidiendo a un usuario focal (una persona que esté dentro del target de usuarios a quien va dirigida la app) que realice cada tarea, mostrandole los bocetos que aparecerán en cada interacción. Por ejemplo, si hace clic sobre el item de menú 'login' le mostraremos el boceto de la página 'login'.
+
+Para este primer test hemos preparado las siguientes acciones:
+
+-   Suponiendo que eres un **usuario no registrado**:
+
+    -   Accede a la información general 'A cerca de' de esta web.
+    -   Regístrate.
+    -   Logueate.
+    -   Modifica tu perfil añadiendo una imagen de avatar.
+    -   Busca un proyecto llamado 'Tetris'.
+    -   Accede al detalle de este proyecto.
+    -   Cierra sesión.
+-   Suponiendo que eres un usuario con rol 'Desarrollador':
+
+    -   Crea un proyecto nuevo.
+    -   Accede a la lista de tus proyectos.
+    -   Muestra el detalle de tu nuevo proyecto.
+    -   Edita tu proyecto cambiando la descripción.
+    -   Borra tu proyecto.
+-   Suponiendo que eres un usuario con rol 'Administrador':
+
+    -   Muestra la lista de proyectos.
+    -   Borra un proyecto.
+    -   Modifica el nombre de un proyecto.
+    -   Muestra la listra de todos los usuarios registrados.
+    -   Canvia el rol de uno de ellos.
+    -   Modifica la imagen de su avatar.
+## Conclusiones y modificaciones
+
+De este primer test de usuario se desprenden las siguientes conclusiones:
+
+-   La vista de proyectos en forma de **tabla no es muy atractiva**.
+-   El usuario ha tenido **dificultades a la hora de intentar modificar la imagen** avatar de un usuario.
+
+Para mejorar estos pequeños problemas de usabilidad vamos a tomar las siguientes acciones:
+
+-   En la vista de proyectos vamos crear un par de botones para poder alternar entre ver los proyectos en forma de **tabla** o en forma de **tarjetas**.
+
+-   En la vista de administración de usuarios, añadir un pequeño icono (un **lápiz**) sobre la imagen del avatar del usuario para que se intuya que, al hacer clic sobre la imagen, se accede a la ventana de modificación de perfil.
+
+Estos serían los bocetos actualizados:
+
+## Vista de proyectyos
+
+## Vista del Panel de administracion de usuarios
+
+Ahora que tenemos los bocetos creados y testeados, es el momento de pasar al siguiente nivel: **El diseño de los wireframes**.
+
+# Wireframe, mockup y guia de estilos
+
+En el apartado anterior hemos diseñado y testeado los bocetos para la versión 1.0 de nuestro proyecto.
+
+El siguiente paso, si nos basamos en el DCU (Diseño centrado en el usuario), sería diseñar los wireframes y, una vez tenemos los wireframes, los mockups junto a la guía de estilos.
+
+Un proyecto de mayor envergadura requeriría de un equipo de trabajo con más de un perfil. La tarea de diseñar la interficie corresponde, por un lado, al **arquitecto de la información** y por otro, a un **diseñador gráfico**.
+
+## y nosotros, ¿necesitamos wireframe? ¿y mockup? ¿y guia de estilos?
+
+En nuestro caso, como el proyecto es muy básico, no nos vamos a centrar en aquellas tareas que corresponderían a un arquitecto de la información ni a un diseñador gráfico.
+
+El mapa web de nuestra aplicación se limita a dar acceso a los proyectos y la administración de los usuarios. Sería tan sencillo com este:
+
+En cuanto al diseño gráfico, aunque es una misión emocionante, nos vamos a limitar a trabajar con un **tema de bootstrap** utilizando **Bootswatch**, respetando, a priori, su paleta de colores y modificando, solo en algunos casos, algunos detalles como *la fuente para los títulos*.
+
+![Alt Text](https://carrebola.github.io/vanillaPill/assets/images/bootswatch-5cfb41f7af4e39535489cba274c60968.png)
+
+
+
+
+
