@@ -21,3 +21,10 @@ document.querySelector('header').innerHTML = header.template;
 
 // Inyectamos el componente footer
 document.querySelector('footer').innerHTML = footer.template;
+
+// Importamos y configuramos el enrutador para manejar las rutas
+import { enrutador } from './componentes/enrutador';
+enrutador.observadorRutas();
+
+// Redirigimos a la página inicial
+window.location = '#/home';

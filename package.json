@@ -19,5 +19,9 @@
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.11.3",
     "bootswatch": "^5.3.3"
-  }
+  },
+  "main": "vite.config.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
