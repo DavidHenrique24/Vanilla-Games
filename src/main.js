@@ -18,6 +18,8 @@ cargarVista();
 
 // Inyectamos el componente header
 document.querySelector('header').innerHTML = header.template;
+//Inyecto el header.script
+header.script();
 
 // Inyectamos el componente footer
 document.querySelector('footer').innerHTML = footer.template;
