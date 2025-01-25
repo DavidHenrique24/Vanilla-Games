@@ -1,38 +1,16 @@
-import { header } from './componentes/header';
-import { footer } from './componentes/footer';
+import "./scss/styles.scss";
+import * as bootstrap from "bootstrap";
+import { header } from "./componentes/header.js";
+import { footer } from "./componentes/Footer";
 
-import './scss/styles.scss';
+// Importamos la Función para detectar eventos al cargar las vistas
+import { enrutador } from "./componentes/enrutador";
 
-// Importamos la vista de inicio de sesión
-async function cargarVista() {
-  const componente = await import('./vistas/loginVista'); // Cambia la ruta si es necesario
-  const vista = componente.default;
-
-  // Inyectamos la vista de inicio de sesión en el main
-  document.querySelector('main').innerHTML = vista.template;
-
-  // Ejecutamos la lógica de la vista (script de inicio de sesión)
-  vista.script();
-}
-cargarVista();
-
-// Inyectamos el componente header
-document.querySelector('header').innerHTML = header.template;
-//Inyecto el header.script
+//Inyectamos el componente header
+document.querySelector("header").innerHTML = header.template;
 header.script();
-
-// Inyectamos el componente footer
-document.querySelector('footer').innerHTML = footer.template;
-
-
-// Inyectamos el componente header
-document.querySelector('header').innerHTML = header.template
-
-
-// Importamos y configuramos el enrutador para manejar las rutas
-import { enrutador } from './componentes/enrutador';
+document.querySelector("footer").innerHTML = footer.template;
+// Cargamos la vista por defecto (home)
 enrutador.observadorRutas();
-
-
-// Redirigimos a la página inicial
-window.location = '#/home';
+// Cargamos la página home
+window.location = "#/home";

@@ -13,6 +13,7 @@ export const enrutador = {
       proyectoNuevo: import('../vistas/proyectoNuevoVista.js'),
       proyectoEditar: import('../vistas/proyectoEditarVista.js'),
       proyectoDetalle: import('../vistas/proyectoDetalleVista.js'),
+      404: import('../vistas/404.js')
     },
   
     // Método que obtiene la ruta del navegador
@@ -35,7 +36,9 @@ export const enrutador = {
         document.querySelector('main').innerHTML = vista.template
         // A los script les pasamos el parametro que hemos extraido de la ruta. Así podemos pasar, por ejemplo, el id de un proyecto
         vista.script(parametro)
-      } 
+      }  else {
+        window.location = '#/404'
+      }
     },
   
     // Capturamos los eventos
