@@ -14,3 +14,5 @@ document.querySelector("footer").innerHTML = footer.template;
 enrutador.observadorRutas();
 // Cargamos la página home
 window.location = "#/home";
+
+ls.setUsuario({ email: 'chafardera@gmial.com', rol: 'registrado' })
