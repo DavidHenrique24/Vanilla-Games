@@ -3,11 +3,15 @@ export const editarPerfil = {
   `
   <!-- Ventana modaledición perfil -->
   <div
-    class="modal fade"
-    id="modalEditarPerfil"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
+   <div
+  class="modal fade"
+  id="modalEditarPerfil"
+  data-bs-backdrop="false" <!-- Esto desactiva el backdrop porque se pone oscuro mal -->
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+
   >
     <!-- Formulario de edición de perfil -->
     <form novalidate action="">
