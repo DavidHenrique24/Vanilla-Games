@@ -1,6 +1,5 @@
-import { perfiles } from '../bd/datos.Prueba.js'
+import { perfiles } from '../bd/datosPrueba.js';
 import { ls } from "../componentes/funciones.js";
-
 export default {
     template: // html
     `
@@ -10,7 +9,7 @@ export default {
                     <form novalidate action="" class="form border shadow-sm p-3">
                         <!-- Email -->
                         <label for="email" class="form-label">Email:</label>
-                          <input id="email" name="email" value="ejemplo@email.com" required type="email" class="form-control" />
+                         <input id="email" name="email" value="ejemplo@email.com" required type="email" class="form-control" />
                         <div class="invalid-feedback">
                             El formato del email no es correcto
                         </div>
@@ -66,8 +65,7 @@ export default {
           
         })
     
-       // Función para enviar datos a la bd
-    // Función para enviar datos a la bd
+        // Función para enviar datos a la bd
     function enviarDatos (formulario) {
         const email = formulario.email.value
         const pass = formulario.password.value
@@ -103,6 +101,5 @@ export default {
         }
       }
     }
- }
-  
+}
   
