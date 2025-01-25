@@ -1,7 +1,7 @@
 import "./scss/styles.scss";
 import * as bootstrap from "bootstrap";
 import { header } from "./componentes/header.js";
-import { footer } from "./componentes/Footer";
+import { footer } from "./componentes/footer.js";
 
 // Importamos la Función para detectar eventos al cargar las vistas
 import { enrutador } from "./componentes/enrutador";
