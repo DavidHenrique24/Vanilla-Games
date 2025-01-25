@@ -10,7 +10,7 @@ export const header = {
   <div class="container">
     <a class="navbar-brand router-link" href="#/home"
       ><img
-        src="images/logo.svg"
+        src="/images/logo.svg"
         alt=""
         width="30"
         height="24"
