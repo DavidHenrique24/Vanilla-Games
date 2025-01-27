@@ -2,46 +2,38 @@ export default {
     template: // html
     `
      <div class="container">
-                <h1 class="mt-5">Nuevo proyecto</h1>
-                <div class="d-flex justify-content-end">
-                    <bottom class="btn btn-outline-secondary mt-5">
-                        <i class="bi bi-arrow-bar-left" style="font-size: 1em"></i>
-                        Volver</bottom
-                    >
-                </div>
-
-                <div class="row mt-2">
-                    <div class="col-12 col-md-4 pt-2 mb-3">
-                        <img src=".images/juego.jpg" alt="" class="img-fluid" />
-                    </div>
-                    <div class="col-12 col-md-8">
-                        <form action="" class="form">
-                            <label class="form-label" for="nombre"><strong>Nombre: </strong></label>
-                            <input id="nombre" type="text" value="Nombre Autor" class="form-control" />
-
-                            <label class="form-label mt-2" for="descripcion"
-                                ><strong>Descripción: </strong></label
-                            >
-                            <textarea id="descripcion" class="form-control" rows="4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, sunt? Recusandae labore at voluptatem tempore incidunt distinctio eaque? Est aspernatur laudantium itaque ullam numquam autem dolor quia amet eum consectetur.</textarea>
-                            <label class="form-label mt-2" for="estado"><strong>Estado: </strong></label>
-                            <select id="estado" class="form-control">
-                                <option value="estado">estado</option>
-                                <option value="otro estado">otro estado</option>
-                            </select>
-                            <label class="form-label mt-2" for="fecha"><strong>Fecha: </strong></label>
-                            <input id="fecha" type="date" class="form-control" value="12/12/2023"/>
-                            <label class="form-label mt-2" for="nombre"><strong>Enlace: </strong></label>
-                            <input id="enlace" type="text" class="form-control" value="http://enlace.com" />
-                            <label class="form-label mt-2" for="nombre"
-                                ><strong>Repositorio: </strong></label
-                            >
-                            <input id="repositorio" type="text" class="form-control" value="user.github.com/123456" />
-                            <input type="submit" class="btn btn-success mt-3" value="Subir proyecto">
-                        </form>
-                    </div>
-                </div>
-                
-            </div>
+    <h1 class="mt-5">Detalle del proyecto</h1>
+    <div class="d-flex justify-content-end">
+      <button id="botonVolver" class="btn btn-outline-secondary mt-5 bi bi-arrow-bar-left">
+        Volver
+      </button>
+    </div>
+  
+    <div class="row mt-2">
+      <div class="col-12 col-md-4 mb-3">
+        <img id="imagenJuego" src="images/juego.jpg" alt="" class="img-fluid">
+      </div>
+      <div class="col-12 col-md-8">
+        <p>
+          <p><strong>Nombre: </strong><span id="nombreJuego">TETRIS</span></p>
+          <p><strong>Descripción: </strong><span id="descripcion">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam modi dicta iste debitis recusandae perspiciatis quae. Eius impedit saepe autem velit voluptate, odio sequi expedita nisi est molestiae quo quisquam!</span></p>
+          <p><strong>Estado: </strong><span id="estado">Estado</span></p>
+          <p><strong>Fecha: </strong><span id="fecha">12/12/2023</span></p>
+          <p><strong>Enlace: </strong><span id="enlace">http://www.enlaceapp.com</span></p>
+          <p><strong>Repositorio: </strong><span id="repositorio">carrebola.github.com/123456</span></p>
+        </p>
+      </div>
+    </div>
+    <div class="container fixed-bottom d-flex justify-content-end" style="padding: 0px 0px 100px 0px">
+      <button
+        id="botonEditarDetalle"
+        data-id=""
+        class="btn btn-success rounded-circle fs-3 shadow bi bi-pencil router-link"
+        style="width: 50px"
+      >
+      </button>
+    </div>
+  </div>
   
     `
   }
