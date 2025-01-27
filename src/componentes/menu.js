@@ -43,7 +43,7 @@ const menuRol = {
       <a class="nav-link active router-link" aria-current="page" href="#/proyectos">PROYECTOS</a>
     </li>
      <li class="nav-item">
-      <a class="nav-link active router-link" aria-current="page" href="#/proyectos">PANEL ADMIN</a>
+      <a class="nav-link active router-link" aria-current="page" href="#/admin">PANEL ADMIN</a>
     </li>
     
   </ul>
