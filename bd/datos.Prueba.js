@@ -53,7 +53,7 @@ export const perfiles = [
     user_id: '2419d5e3-46a6-45d6-98a2-b02c8ac5d3fe',
     nombre: 'Javier',
     apellidos: 'Bardem',
-    avatar: '',
+    avatar: 'https://i.ebayimg.com/images/g/yfwAAOSwBOBkQh-V/s-l1200.jpg',
     estado: 'Activo',
     rol: 'admin',
     email: 'javier@example.com',
