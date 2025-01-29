@@ -95,7 +95,6 @@ export default {
         </thead>
         <tbody id="tbodyProyectos">
           <!-- Aqui van los datos generados por la lógica -->
-          <p>No tienes proyectos</p>
         </tbody>
       </table>
     </div>

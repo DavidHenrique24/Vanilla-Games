@@ -1,4 +1,3 @@
-
 import { ls } from './funciones.js'
 
 const menuRol = {
