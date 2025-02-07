@@ -1,4 +1,5 @@
-import {perfiles} from '../../bd/datos.Prueba.js'
+import {Perfil} from '../../bd/perfil.js'
+import {Proyecto} from '../../bd/proyecto.js'
 export default {
     template: // html
     `
@@ -13,14 +14,14 @@ export default {
     `,
      script: async () => {
       console.log('Vista home cargada')
-      console.log(perfiles) 
-
-
-      
-    
+      console.log(Perfil) 
+      console.log(Proyecto) 
+      const resultado = await Proyecto.getAll()
+      console.log(resultado)
+    }   
     }
 
 
-  }
+  
   
   
