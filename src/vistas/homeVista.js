@@ -1,3 +1,5 @@
+import {Perfil} from '../../bd/perfil.js'
+import {Proyecto} from '../../bd/proyecto.js'
 export default {
     template: // html
     `
@@ -9,7 +11,17 @@ export default {
       <img src="../images/logo.svg" alt="fpllefia" class="img-fluid" />
     </div>
   </div>
-    `
-  }
+    `,
+     script: async () => {
+      console.log('Vista home cargada')
+      console.log(Perfil) 
+      console.log(Proyecto) 
+      const resultado = await Proyecto.getAll()
+      console.log(resultado)
+    }   
+    }
+
+
+  
   
   
