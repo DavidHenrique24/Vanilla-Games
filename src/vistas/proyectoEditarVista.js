@@ -1,6 +1,6 @@
 import { proyectos } from "../../bd/datos.Prueba";
 import { Proyecto } from "../../bd/proyecto";
-import { User } from "../../bd/user";
+
 
 export default {
   // html
