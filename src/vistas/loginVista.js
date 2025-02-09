@@ -1,6 +1,7 @@
 import { ls } from "../componentes/funciones.js";
 import { User } from '../../bd/user.js';
 import { Perfil } from '../../bd/perfil.js';
+import {header} from '../componentes/header.js';
 
 export default {
   template: `
@@ -51,40 +52,49 @@ export default {
         enviarDatos(formulario);
       }
     });
+    
+
 
 // Función para enviar datos a la bd
-    async function enviarDatos(formulario) {
-      try {
-        // login
-        const user = {
-          email: formulario.email.value,
-          password: formulario.password.value
-        }
-        User.logout()
-        const usuarioLogueado = await User.login(user)
-        console.log('¡login correcto!', usuarioLogueado)
-        // Ahora vamos a capturar los datos del perfil del usuario logueado
-        console.log('usuarioLogueado', usuarioLogueado);
-        const userId = usuarioLogueado.id
-        console.log('userId', userId);
-        const perfilLogueado = await Perfil.getByUserId(userId)
-        console.log('Perfil logueado', perfilLogueado);
-        const usuario = {
-          email: usuarioLogueado.email,
-          rol: perfilLogueado.rol,
-          avatar: perfilLogueado.avatar
-        }
-        console.log('perfil localstorage', usuario);
-        // Guardamos datos de usaurio en localstorage
-        ls.setUsuario(usuario)
-        // Cargamos página home
-        window.location = '#/proyectos'
-        // Actualizamos el header para que se muestren los menús que corresponden al rol
-        header.script()
-      } catch (error) {
-        console.log('Error al iniciar sesión', error)
-        alert('El usuario no existe o la contraseña no es correcta', error)
-      }
-    }
+async function enviarDatos(formulario) {
+  try {
+    // login
+    const user = {
+      email: formulario.email.value,
+      password: formulario.password.value,
+    };
+    User.logout();
+    const usuarioLogueado = await User.login(user);
+    console.log("¡login correcto!", usuarioLogueado);
+    // Ahora vamos a capturar los datos del perfil del usuario logueado
+    console.log("usuarioLogueado", usuarioLogueado);
+    const userId = usuarioLogueado.id;
+    console.log("userId", userId);
+
+    const perfilLogueado = await Perfil.getByUserId(userId);
+    console.log("Perfil logueado", perfilLogueado);
+    const usuario = {
+      email: usuarioLogueado.email,
+      rol: perfilLogueado.rol,
+      avatar: perfilLogueado.avatar,
+    };
+    console.log("perfil localstorage", usuario);
+    // Guardamos datos de usaurio en localstorage
+    ls.setUsuario(usuario);
+    // Cargamos página home
+    window.location = "#/proyectos";
+    // Actualizamos el header para que se muestren los menús que corresponden al rol
+    header.script();
+  } catch (error) {
+    console.log("Error al iniciar sesión", error);
+    alert("El usuario no existe o la contraseña no es correcta", error);
   }
 }
+},
+};
+
+
+
+
+
+

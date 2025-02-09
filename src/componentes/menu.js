@@ -61,7 +61,7 @@ const menuUsuario = {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img src="images/Pp.jpg" alt="" width="40" />
+        <img src="${ls.getUsuario().avatar}" alt="" width="40" />
       </a>
       <ul class="dropdown-menu me-0" style="left: -100px; width: 100px">
         <li class="text-light text-end p-2 small">
@@ -98,7 +98,7 @@ const menuUsuario = {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img src="images/Pp.jpg" alt="" width="40" />
+        <img src="${ls.getUsuario().avatar}" alt="" width="40" />
       </a>
       <ul class="dropdown-menu me-0" style="left: -100px; width: 100px">
         <li class="text-light text-end p-2 small">
@@ -137,7 +137,7 @@ const menuUsuario = {
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <img src="images/Pp.jpg" alt="" width="40" />
+        <img src="${ls.getUsuario().avatar}" alt="" width="40" />
       </a>
       <ul class="dropdown-menu me-0" style="left: -100px; width: 100px">
         <li class="text-light text-end p-2 small">
