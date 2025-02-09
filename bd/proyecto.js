@@ -1,5 +1,5 @@
 // Importa el objeto 'supabase' desde un archivo 'supabase.js'
-import { supabase } from "./supabase.js";
+import { supabase } from "./supabase";
 
 // Definición de la clase Proyecto
 export class Proyecto {
