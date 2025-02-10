@@ -1,7 +1,8 @@
-import { ls } from "../componentes/funciones.js";
-import { User } from '../../bd/user.js';
-import { Perfil } from '../../bd/perfil.js';
-import {header} from '../componentes/header.js';
+import { ls } from "../componentes/funciones.js"
+import { User } from '../../bd/user.js'
+import { Perfil } from '../../bd/perfil.js'
+import {header} from '../componentes/header.js'
+
 
 export default {
   template: `

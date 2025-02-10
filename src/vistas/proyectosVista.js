@@ -1,6 +1,7 @@
-import { ls } from "../componentes/funciones";
-import { Proyecto } from "../../bd/proyecto";
-import { User } from "../../bd/user";
+import { proyectos } from "../../bd/datos.Prueba.js"
+import { ls } from "../componentes/funciones.js"
+import { Proyecto } from "../../bd/proyecto.js"
+import { User } from "../../bd/user.js"
 
 export default {
   // html
@@ -34,13 +35,13 @@ export default {
     <div class="row">
       <div class="col-12 col-sm-4 mb-3">
       <!-- Boton para subir proyectos -->
-        <a id="botonSubirProyecto" href="#/nuevoProyecto" class="btn btn-primary w-100 router-link">Subir proyecto</a>
+        <a id="botonSubirProyecto" href="#/proyectoNuevo" class="btn btn-primary w-100 router-link">Subir proyecto</a>
       </div>
       <div class="d-flex col-12 col-sm-8 mb-3">
         <!-- Botones para alternar entre vista de tabla o de tarjetas -->
-        <button class="vistaTabla btn btn-secondary me-2 bi bi-list">
+        <button class="btn btn-secondary me-2 bi bi-grid-3x3-gap vistaTabla">
         </button>
-        <button class="vistaTarjetas btn btn-secondary me-2 bi bi-grid-3x3-gap ">
+        <button class="btn btn-secondary me-2 bi bi-list vistaTarjetas">
         </button>
         <!-- Buscador -->
         <div class="input-group flex-nowrap">
@@ -106,10 +107,9 @@ export default {
     </div>
   </div>
 </div>
-  `,
+      `,
   script: async () => {
     // **** AQUI DEBEMOS CAPTURAR LOS PROYECTOS DE LA BASE DE DATOS ****
-    console.log('Datos del proyecto:', Proyecto);
 
     // Capturamos proyectos y guardamos en variable para poder ser filtrada
     const datosBd = await Proyecto.getAll();
@@ -154,49 +154,48 @@ export default {
         let botones = "";
         if (userId === proyecto.user_id) {
           botones = `
-          <td><a
-            href="#/editarProyecto/${proyecto.id}"
-            data-id = ${proyecto.id}
-            class="botonAdmin botonEditar d-none d-sm-inline btn btn-sm btn-outline-primary bi bi-pencil"
-          ></a></td>
-          <td><a
-            data-id = ${proyecto.id}
-            class="botonAdmin botonBorrar d-none d-sm-inline btn btn-sm btn-outline-danger bi bi-trash3"
-          ></a></td>
-          `;
+              <td><a
+                data-id = ${proyecto.id}
+                class="botonAdmin botonEditar d-none d-sm-inline btn btn-sm btn-outline-primary bi bi-pencil"
+              ></a></td>
+              <td><a
+                data-id = ${proyecto.id}
+                class="botonAdmin botonBorrar d-none d-sm-inline btn btn-sm btn-outline-danger bi bi-trash3"
+              ></a></td>
+              `;
         }
         // sumamos un tr con los datos del proyecto de la iteración
         tbodyProyectos +=
           // html
           `
-        <tr data-id=${proyecto.id} class="verDetalle">
-          <td>
-            <div class="containerImagen">
-              <img 
-                class="verDetalle"
-                data-id=${proyecto.id}
-                width="200px" 
-                src=${proyecto.imagen || "images/imagenVacia.png"} 
-                alt="imagen proyecto" />
-            </div>
-          </td>
-          <td>${proyecto.nombre}</td>
-          <td>${proyecto.descripcion}</td>
-          <td><a href="${
-            proyecto.enlace
-          }" target="_blank"><i class="bi bi-link fs-4"></i></a></td>
-          <td><a href="${
-            proyecto.repositorio
-          }" target="_blank"><i class="bi bi-folder-symlink fs-4"></i></a></td>
-          <td>${proyecto.nombre_usuario} ${proyecto.apellidos_usuario}</td>
-          <td>${proyecto.created_at}</td>
-          <td>${proyecto.estado}</td>
-          <td>
-            <!-- Botones de edición y borrado -->
-            ${botones}
-          </td>
-        </tr>   
-        `;
+            <tr data-id="${proyecto.id}" class="verDetalle">
+              <td>
+                <div class="containerImagen">
+                  <img 
+                    class="verDetalle"
+                    data-id="${proyecto.id}"
+                    width="200px" 
+                    src=${proyecto.imagen || "images/imagenVacia.png"} 
+                    alt="imagen proyecto" />
+                </div>
+              </td>
+              <td>${proyecto.nombre}</td>
+              <td>${proyecto.descripcion}</td>
+              <td><a href="${
+                proyecto.enlace
+              }" target="_blank"><i class="bi bi-link fs-4"></i></a></td>
+              <td><a href="${
+                proyecto.repositorio
+              }" target="_blank"><i class="bi bi-folder-symlink fs-4"></i></a></td>
+              <td>${proyecto.nombre_usuario} ${proyecto.apellidos_usuario}</td>
+              <td>${proyecto.created_at}</td>
+              <td>${proyecto.estado}</td>
+              <td>
+                <!-- Botones de edición y borrado -->
+                ${botones}
+              </td>
+            </tr>   
+            `;
       });
       // inyectamos el resultado en el tbody
       document.querySelector("#tbodyProyectos").innerHTML = tbodyProyectos;
@@ -221,65 +220,64 @@ export default {
         let botones = "";
         if (usuario.user_id === proyecto.user_id) {
           botones = `
-          <a
-            href="#/editarProyecto/${proyecto.id}"
-            data-id = ${proyecto.id}
-            class="botonAdmin botonEditar d-none d-sm-inline btn btn-sm btn-outline-primary bi bi-pencil"
-          ></a>
-          <a
-            data-id = ${proyecto.id}
-            class="botonAdmin botonBorrar d-none d-sm-inline btn btn-sm btn-outline-danger bi bi-trash3"
-          ></a>
-          `;
+              <a
+                data-id = ${proyecto.id}
+                class="botonAdmin botonEditar d-none d-sm-inline btn btn-sm btn-outline-primary bi bi-pencil"
+              ></a>
+              <a
+                data-id = ${proyecto.id}
+                class="botonAdmin botonBorrar d-none d-sm-inline btn btn-sm btn-outline-danger bi bi-trash3"
+              ></a>
+              `;
         }
         // sumamos un tr con los datos del proyecto
         tarjetasProyectos +=
           // html
           `
-        <!-- tarjeta  -->
-        <div class="col-12 col-lg-6">
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div
-                class="col-4 verDetalle"
-                data-id="${proyecto.id}"
-                style="
-                  background-image: url(${
-                    proyecto.imagen || "images/imagenVacia.png"
-                  });
-                  background-position: center;
-                  background-size: cover;
-                "
-              ></div>
-              <div class="col-8">
-                <div class="card-body">
-                  <h5 class="card-title">${proyecto.nombre}</h5>
-                  <p class="card-text">
-                    ${proyecto.descripcion}
-                  </p>
-                  <p class="small m-0 text-end text-italic">Autor: ${
-                    proyecto.nombre_usuario
-                  } ${proyecto.apellidos_usuario}</p>
-                  <p class="small text-end text-italic">Fecha: ${
-                    proyecto.created_at
-                  }</p>
-                  <a class="btn btn-sm btn-outline-primary" href="${
-                    proyecto.enlace
-                  }" target="_blank"><i class="bi bi-link"></i></a>
-                  <a class="btn btn-sm btn-outline-primary" href="${
-                    proyecto.repositorio
-                  }" target="_blank"><i class="bi bi-folder-symlink"></i></a>
-                  <button class="btn btn-sm btn-success">${
-                    proyecto.estado
-                  }</button>
-                  <!-- Botones editar y borrar -->
-                  ${botones}
+            <!-- tarjeta  -->
+            <div class="col-12 col-lg-6">
+              <div class="card mb-3">
+                <div class="row g-0">
+                  <div
+                    class="col-4 verDetalle"
+                    data-id="${proyecto.id}"
+                    style="
+                      background-image: url(${
+                        proyecto.imagen || "images/imagenVacia.png"
+                      });
+                      background-position: center;
+                      background-size: cover;
+                    "
+                  ></div>
+                  <div class="col-8">
+                    <div class="card-body">
+                      <h5 class="card-title">${proyecto.nombre}</h5>
+                      <p class="card-text">
+                        ${proyecto.descripcion}
+                      </p>
+                      <p class="small m-0 text-end text-italic">Autor: ${
+                        proyecto.nombre_usuario
+                      } ${proyecto.apellidos_usuario}</p>
+                      <p class="small text-end text-italic">Fecha: ${
+                        proyecto.created_at
+                      }</p>
+                      <a class="btn btn-sm btn-outline-primary" href="${
+                        proyecto.enlace
+                      }" target="_blank"><i class="bi bi-link"></i></a>
+                      <a class="btn btn-sm btn-outline-primary" href="${
+                        proyecto.repositorio
+                      }" target="_blank"><i class="bi bi-folder-symlink"></i></a>
+                      <button class="btn btn-sm btn-success">${
+                        proyecto.estado
+                      }</button>
+                      <!-- Botones editar y borrar -->
+                      ${botones}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>  
-        `;
+            </div>  
+            `;
       });
       // inyectamos el resultado en tbody
       document.querySelector("#tabTarjetas").innerHTML = tarjetasProyectos;
@@ -429,21 +427,21 @@ export default {
           // *** AQUÍ VA LA FUNCIÓN QUE BORRA DE LA BASE DE DATOS EL PROYECTO CORRESPONDIENTE AL ID ***
         }
       }
-
       // Visualizar detalle del proyecto si click sobre tr de vista tabla
       if (event.target.tagName === "TD") {
         console.log("clic en td");
         id = event.target.parentNode.dataset.id;
-        window.location = `#/detalleProyecto/${id}`;
+        window.location = `#/proyectoDetalle/${id}`;
       }
       // Si hacemos clic sobre la imagen de tabla o de vista tarjetas
       if (event.target.classList.contains("verDetalle")) {
         id = event.target.dataset.id;
-        window.location = `#/detalleProyecto/${id}`;
+        window.location = `#/proyectoDetalle/${id}`;
       }
     });
 
-    // ####################################################################    // Mostrar/ocultar botón 'subir proyecto'
+    // ####################################################################
+    // Mostrar/ocultar botón 'subir proyecto'
     // ####################################################################
 
     // Ocultamos el botón de subir proyecto si el rol es registrado

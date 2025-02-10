@@ -1,20 +1,18 @@
-// Importa el objeto 'supabase' desde un archivo 'supabase.js'
-import { supabase } from "./supabase";
+import { supabase } from "./supabase.js";
 
-// Definición de la clase Proyecto
+// Definición de la clase proyecto
 export class Proyecto {
   // Constructor que inicializa las propiedades del proyecto
   constructor({
     id = null, // ID único del proyecto
     created_at = null, // Fecha de creación del proyecto
-    user_id = null, // ID del usuario propietario del proyecto
-    nombre = null, // Nombre del proyecto
-    descripcion = null, // Descripción del proyecto
-    imagen = null, // URL de la imagen del proyecto
+    user_id = null, // ID del usuario asociado al proyecto
+    nombre = null, // Nombre del usuario
+    descripcion = null, // descripcion del proyecto
+    imagen = "default_imagen.png", // URL del imagen por defecto
     enlace = null, // URL del enlace del proyecto
     repositorio = null, // URL del repositorio del proyecto
-    autor = null, // Nombre del autor del proyecto
-    estado = "activo", // Estado del proyecto (activo/inactivo)
+    estado = "activo", // Estado del proyecto (activo/inactivo, por ejemplo)
   }) {
     // Asignación de valores a las propiedades del proyecto
     this.id = id;
@@ -25,7 +23,6 @@ export class Proyecto {
     this.imagen = imagen;
     this.enlace = enlace;
     this.repositorio = repositorio;
-    this.autor = autor;
     this.estado = estado;
   }
 
@@ -42,7 +39,7 @@ export class Proyecto {
       throw new Error(error.message);
     }
 
-    // Mapea los proyectos obtenidos a instancias de la clase Proyecto y los devuelve
+    // Mapea los proyectos obtenidos a instancias de la clase proyecto y los devuelve
     return proyectos.map((proyecto) => new Proyecto(proyecto));
   }
 
@@ -52,22 +49,21 @@ export class Proyecto {
     const { data: proyecto, error } = await supabase
       .from("proyectos")
       .select("*")
-      .eq("id", id)
-      .single();
+      .eq("id", id); // Filtra por el ID especificado
 
     // Manejo de errores
     if (error) {
       throw new Error(error.message);
     }
 
-    // Devuelve una nueva instancia de Proyecto
-    return new Proyecto(proyecto);
+    // Devuelve una instancia de Proyecto con la información obtenida
+    return new Proyecto(proyecto[0]);
   }
 
-  // Método estático para obtener proyectos por el ID del usuario propietario
+  // Método estático para obtener un proyecto por el ID del usuario asociado
   static async getByUserId(userId) {
-    // Realiza una consulta para obtener proyectos por el ID de usuario
-    const { data: proyectos, error } = await supabase
+    // Realiza una consulta para obtener un proyecto por el ID de usuario asociado
+    const { data: proyecto, error } = await supabase
       .from("proyectos")
       .select("*")
       .eq("user_id", userId); // Filtra por el ID de usuario especificado
@@ -77,8 +73,8 @@ export class Proyecto {
       throw new Error(error.message);
     }
 
-    // Devuelve un array de instancias de Proyecto
-    return proyectos.map((proyecto) => new Proyecto(proyecto));
+    // Devuelve una instancia de Proyecto con la información obtenida
+    return new Proyecto(proyecto[0]);
   }
 
   // Método estático para crear un nuevo proyecto

@@ -1,4 +1,4 @@
-import { Proyecto } from "../../bd/proyecto"
+import { Proyecto } from "../../bd/proyecto";
 
 export default {
   // html
