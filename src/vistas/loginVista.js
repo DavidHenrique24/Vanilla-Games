@@ -1,9 +1,11 @@
-import { perfiles } from '../../bd/datos.Prueba.js';
 import { ls } from "../componentes/funciones.js";
+import { User } from '../../bd/user.js';
+import { Perfil } from '../../bd/perfil.js';
+import {header} from '../componentes/header.js';
 
 export default {
-    template: `
-     <div class="container">
+  template: `
+    <div class="container">
         <h1 class="mt-5 text-center">Inicia sesión</h1>
         <div class="m-5 mx-auto" style="max-width: 400px">
             <form id="formulario" novalidate action="" class="form border shadow-sm p-3">
@@ -33,58 +35,66 @@ export default {
             <a class="d-block mt-5 btn btn-secondary mx-auto" href="registro.html">¿Eres nuevo? Regístrate</a>
         </div>
     </div>
-    `,
-    script: () => {
-        console.log('vista login cargada');
-        
-        const formulario = document.querySelector('#formulario');
-        
-        formulario.addEventListener('submit', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            
-            if (!formulario.checkValidity()) {
-                formulario.classList.add('was-validated');
-                console.log('No valida');
-            } else {
-                enviarDatos(formulario);
-            }
-        });
-
-       // Función para enviar datos a la bd
-    function enviarDatos (formulario) {
-        const email = formulario.email.value
-        const pass = formulario.password.value
-  
-        // buscamos el indice del email en el array perfiles
-        const indexUser = perfiles.findIndex((user) => user.email === email) // 1
-        // Si encuentra un usuario
-        if (indexUser > 0) {
-          // Si la contraseña es correcta
-          if (perfiles[indexUser].contraseña === pass) {
-            console.log('¡login correcto!')
-            const usuario = {
-              nombre: perfiles[indexUser].nombre,
-              apellidos: perfiles[indexUser].apellidos,
-              email: perfiles[indexUser].email,
-              rol: perfiles[indexUser].rol,
-              avatar: perfiles[indexUser].avatar,
-              user_id: perfiles[indexUser].user_id
-            }
-            // Guardamos datos de usaurio en localstorage
-            ls.setUsuario(usuario)
-            // Cargamos página home
-            window.location = '#/proyectos'
-            // Actualizamos el header para que se muestren los menús que corresponden al rol
-            header.script()
-          } else {
-            // console.log('La contraseña no corresponde')
-            alert('El usuario no existe o la contraseña no es correcta')
-          }
-        } else {
-          // console.log('El usuario no existe')
-          alert('El usuario no existe o la contraseña no es correcta')
-        }
+  `,
+  script: () => {
+    console.log('Vista login cargada');
+    
+    const formulario = document.querySelector('#formulario');
+    
+    formulario.addEventListener('submit', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      if (!formulario.checkValidity()) {
+        formulario.classList.add('was-validated');
+        console.log('Formulario no válido');
+      } else {
+        enviarDatos(formulario);
       }
-    }
+    });
+    
+
+
+// Función para enviar datos a la bd
+async function enviarDatos(formulario) {
+  try {
+    // login
+    const user = {
+      email: formulario.email.value,
+      password: formulario.password.value,
+    };
+    User.logout();
+    const usuarioLogueado = await User.login(user);
+    console.log("¡login correcto!", usuarioLogueado);
+    // Ahora vamos a capturar los datos del perfil del usuario logueado
+    console.log("usuarioLogueado", usuarioLogueado);
+    const userId = usuarioLogueado.id;
+    console.log("userId", userId);
+
+    const perfilLogueado = await Perfil.getByUserId(userId);
+    console.log("Perfil logueado", perfilLogueado);
+    const usuario = {
+      email: usuarioLogueado.email,
+      rol: perfilLogueado.rol,
+      avatar: perfilLogueado.avatar,
+    };
+    console.log("perfil localstorage", usuario);
+    // Guardamos datos de usaurio en localstorage
+    ls.setUsuario(usuario);
+    // Cargamos página home
+    window.location = "#/proyectos";
+    // Actualizamos el header para que se muestren los menús que corresponden al rol
+    header.script();
+  } catch (error) {
+    console.log("Error al iniciar sesión", error);
+    alert("El usuario no existe o la contraseña no es correcta", error);
+  }
+}
+},
 };
+
+
+
+
+
+
