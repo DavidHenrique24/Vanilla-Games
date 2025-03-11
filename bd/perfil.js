@@ -1,3 +1,4 @@
+
 // Importa el objeto 'supabase' desde un archivo 'supabase.js'
 import { supabase } from "./supabase.js";
 
@@ -13,7 +14,6 @@ export class Perfil {
     avatar = "default_avatar.png", // URL del avatar por defecto
     estado = "activo", // Estado del perfil (activo/inactivo, por ejemplo)
     rol = "registrado", // Rol del usuario (registrado, administrador, etc.)
-    email = null, // Email del usuario
   }) {
     // Asignación de valores a las propiedades del perfil
     this.id = id;
@@ -24,7 +24,6 @@ export class Perfil {
     this.avatar = avatar;
     this.estado = estado;
     this.rol = rol;
-    this.email = email; // Asignación del email
   }
 
   // Método estático para obtener todos los perfiles
@@ -80,11 +79,6 @@ export class Perfil {
 
   // Método estático para crear un nuevo perfil
   static async create(perfilData) {
-    // Verificación de campos obligatorios
-    if (!perfilData.user_id || !perfilData.nombre || !perfilData.email) {
-      throw new Error("Faltan campos obligatorios: user_id, nombre y email son requeridos.");
-    }
-
     // Inserta un nuevo perfil en la base de datos con los datos proporcionados
     const { data, error } = await supabase
       .from("perfiles")
