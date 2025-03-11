@@ -13,6 +13,7 @@ export class Perfil {
     avatar = "default_avatar.png", // URL del avatar por defecto
     estado = "activo", // Estado del perfil (activo/inactivo, por ejemplo)
     rol = "registrado", // Rol del usuario (registrado, administrador, etc.)
+    email = null, // Email del usuario
   }) {
     // Asignación de valores a las propiedades del perfil
     this.id = id;
@@ -23,6 +24,7 @@ export class Perfil {
     this.avatar = avatar;
     this.estado = estado;
     this.rol = rol;
+    this.email = email; // Asignación del email
   }
 
   // Método estático para obtener todos los perfiles
@@ -39,7 +41,7 @@ export class Perfil {
     }
 
     // Mapea los perfiles obtenidos a instancias de la clase Perfil y los devuelve
-    return perfiles.map((perfil) => new Perfil(perfil));
+    return perfiles ? perfiles.map((perfil) => new Perfil(perfil)) : [];
   }
 
   // Método estático para obtener un perfil por su ID
@@ -56,7 +58,7 @@ export class Perfil {
     }
 
     // Devuelve una instancia de Perfil con la información obtenida
-    return new Perfil(perfil[0]);
+    return perfil && perfil[0] ? new Perfil(perfil[0]) : null;
   }
 
   // Método estático para obtener un perfil por el ID del usuario asociado
@@ -73,17 +75,16 @@ export class Perfil {
     }
 
     // Devuelve una instancia de Perfil con la información obtenida
-    return new Perfil(perfil[0]);
+    return perfil && perfil[0] ? new Perfil(perfil[0]) : null;
   }
 
   // Método estático para crear un nuevo perfil
   static async create(perfilData) {
-    // Verifica que perfilData contenga todos los campos necesarios
-    if (!perfilData.user_id || !perfilData.nombre) {
-      throw new Error(
-        "Faltan campos obligatorios: user_id y nombre son requeridos."
-      );
+    // Verificación de campos obligatorios
+    if (!perfilData.user_id || !perfilData.nombre || !perfilData.email) {
+      throw new Error("Faltan campos obligatorios: user_id, nombre y email son requeridos.");
     }
+
     // Inserta un nuevo perfil en la base de datos con los datos proporcionados
     const { data, error } = await supabase
       .from("perfiles")
@@ -96,23 +97,35 @@ export class Perfil {
     }
 
     // Si se insertaron datos, devuelve una nueva instancia de Perfil con los datos insertados
-    return data ? new Perfil(data[0]) : null;
+    return data && data[0] ? new Perfil(data[0]) : null;
   }
 
   // Método estático para actualizar un perfil existente por su ID
   static async update(id, newData) {
     // Actualiza un perfil existente en la base de datos con los nuevos datos
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("perfiles")
       .update(newData) // Actualiza con los nuevos datos proporcionados
-      .eq("id", id); // Filtra por el ID del perfil a actualizar
+      .eq("id", id) // Filtra por el ID del perfil a actualizar
+      .select();
 
     // Manejo de errores
     if (error) {
       throw new Error(`Error actualizando perfil: ${error.message}`);
     }
 
-    // Si la actualización fue exitosa, devuelve true
+    // Devuelve el perfil actualizado
+    return data && data[0] ? new Perfil(data[0]) : null;
+  }
+
+  // Método estático para borrar un perfil por su ID
+  static async delete(id) {
+    const { error } = await supabase.from("perfiles").delete().eq("id", id);
+
+    if (error) {
+      throw new Error(`Error borrando perfil: ${error.message}`);
+    }
+
     return true;
   }
 }

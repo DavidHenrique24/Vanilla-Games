@@ -1,8 +1,7 @@
-import { ls } from "../componentes/funciones.js"
-import { User } from '../../bd/user.js'
-import { Perfil } from '../../bd/perfil.js'
-import {header} from '../componentes/header.js'
-
+import { ls } from "../componentes/funciones.js";
+import { User } from '../../bd/user.js';
+import { Perfil } from '../../bd/perfil.js';
+import { header } from '../componentes/header.js';
 
 export default {
   template: `
@@ -39,63 +38,68 @@ export default {
   `,
   script: () => {
     console.log('Vista login cargada');
-    
+
     const formulario = document.querySelector('#formulario');
-    
-    formulario.addEventListener('submit', (event) => {
+
+    formulario.addEventListener('submit', async (event) => {
       event.preventDefault();
       event.stopPropagation();
-      
+
       if (!formulario.checkValidity()) {
         formulario.classList.add('was-validated');
         console.log('Formulario no válido');
-      } else {
-        enviarDatos(formulario);
+        return;
       }
+
+      await enviarDatos(formulario);
     });
-    
 
+    // Función para enviar datos a la BD
+    async function enviarDatos(formulario) {
+      try {
+        // 1️⃣ Capturar datos del formulario
+        const user = {
+          email: formulario.email.value,
+          password: formulario.password.value
+        };
 
-// Función para enviar datos a la bd
-async function enviarDatos(formulario) {
-  try {
-    // login
-    const user = {
-      email: formulario.email.value,
-      password: formulario.password.value,
-    };
-    User.logout();
-    const usuarioLogueado = await User.login(user);
-    console.log("¡login correcto!", usuarioLogueado);
-    // Ahora vamos a capturar los datos del perfil del usuario logueado
-    console.log("usuarioLogueado", usuarioLogueado);
-    const userId = usuarioLogueado.id;
-    console.log("userId", userId);
+        // 2️⃣ Cerrar sesión por si hay una sesión activa
+        await User.logout();
 
-    const perfilLogueado = await Perfil.getByUserId(userId);
-    console.log("Perfil logueado", perfilLogueado);
-    const usuario = {
-      email: usuarioLogueado.email,
-      rol: perfilLogueado.rol,
-      avatar: perfilLogueado.avatar,
-    };
-    console.log("perfil localstorage", usuario);
-    // Guardamos datos de usaurio en localstorage
-    ls.setUsuario(usuario);
-    // Cargamos página home
-    window.location = "#/proyectos";
-    // Actualizamos el header para que se muestren los menús que corresponden al rol
-    header.script();
-  } catch (error) {
-    console.log("Error al iniciar sesión", error);
-    alert("El usuario no existe o la contraseña no es correcta", error);
+        // 3️⃣ Iniciar sesión con los datos proporcionados
+        const usuarioLogueado = await User.login(user);
+        console.log('¡Login correcto!', usuarioLogueado);
+
+        // 4️⃣ Verificar si se obtuvo un usuario válido
+        if (!usuarioLogueado || !usuarioLogueado.id) {
+          throw new Error('El usuario logueado no tiene un ID válido.');
+        }
+
+        // 5️⃣ Obtener el perfil del usuario desde la BD
+        const userId = usuarioLogueado.id;
+        console.log('userId:', userId);
+
+        const perfilLogueado = await Perfil.getByUserId(userId);
+        console.log('Perfil logueado:', perfilLogueado);
+
+        // 6️⃣ Almacenar datos del usuario en localStorage
+        const usuario = {
+          email: usuarioLogueado.email,
+          rol: perfilLogueado.rol,
+          avatar: perfilLogueado.avatar
+        };
+        console.log('Perfil localStorage:', usuario);
+        ls.setUsuario(usuario);
+
+        // 7️⃣ Redireccionar a la página de proyectos
+        window.location = '#/proyectos';
+
+        // 8️⃣ Actualizar el header según el rol
+        header.script();
+      } catch (error) {
+        console.error('Error al iniciar sesión:', error.message);
+        alert('El usuario no existe o la contraseña es incorrecta');
+      }
+    }
   }
-}
-},
 };
-
-
-
-
-
-
