@@ -40,66 +40,68 @@ export default {
     console.log('Vista login cargada');
 
     const formulario = document.querySelector('#formulario');
-
-    formulario.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      if (!formulario.checkValidity()) {
-        formulario.classList.add('was-validated');
-        console.log('Formulario no válido');
-        return;
-      }
-
-      await enviarDatos(formulario);
-    });
-
-    // Función para enviar datos a la BD
-    async function enviarDatos(formulario) {
-      try {
-        // 1️⃣ Capturar datos del formulario
-        const user = {
-          email: formulario.email.value,
-          password: formulario.password.value
-        };
-
-        // 2️⃣ Cerrar sesión por si hay una sesión activa
-        await User.logout();
-
-        // 3️⃣ Iniciar sesión con los datos proporcionados
-        const usuarioLogueado = await User.login(user);
-        console.log('¡Login correcto!', usuarioLogueado);
-
-        // 4️⃣ Verificar si se obtuvo un usuario válido
-        if (!usuarioLogueado || !usuarioLogueado.id) {
-          throw new Error('El usuario logueado no tiene un ID válido.');
+    
+    if (formulario) {
+      formulario.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+    
+        if (!formulario.checkValidity()) {
+          formulario.classList.add('was-validated');
+          console.log('Formulario no válido');
+          return;
         }
-
-        // 5️⃣ Obtener el perfil del usuario desde la BD
-        const userId = usuarioLogueado.id;
-        console.log('userId:', userId);
-
-        const perfilLogueado = await Perfil.getByUserId(userId);
-        console.log('Perfil logueado:', perfilLogueado);
-
-        // 6️⃣ Almacenar datos del usuario en localStorage
-        const usuario = {
-          email: usuarioLogueado.email,
-          rol: perfilLogueado.rol,
-          avatar: perfilLogueado.avatar
-        };
-        console.log('Perfil localStorage:', usuario);
-        ls.setUsuario(usuario);
-
-        // 7️⃣ Redireccionar a la página de proyectos
-        window.location = '#/proyectos';
-
-        // 8️⃣ Actualizar el header según el rol
-        header.script();
-      } catch (error) {
-        console.error('Error al iniciar sesión:', error.message);
-        alert('El usuario no existe o la contraseña es incorrecta');
-      }
+    
+        await enviarDatos(formulario);
+      });
     }
   }
 };
+
+// Función para enviar datos a la BD
+async function enviarDatos(formulario) {
+  try {
+    // 1️⃣ Capturar datos del formulario
+    const user = {
+      email: formulario.email.value,
+      password: formulario.password.value
+    };
+
+    // 2️⃣ Cerrar sesión por si hay una sesión activa
+    await User.logout();
+
+    // 3️⃣ Iniciar sesión con los datos proporcionados
+    const usuarioLogueado = await User.login(user);
+    console.log('¡Login correcto!', usuarioLogueado);
+
+    // 4️⃣ Verificar si se obtuvo un usuario válido
+    if (!usuarioLogueado || !usuarioLogueado.id) {
+      throw new Error('El usuario logueado no tiene un ID válido.');
+    }
+
+    // 5️⃣ Obtener el perfil del usuario desde la BD
+    const userId = usuarioLogueado.id;
+    console.log('userId:', userId);
+
+    const perfilLogueado = await Perfil.getByUserId(userId);
+    console.log('Perfil logueado:', perfilLogueado);
+
+    // 6️⃣ Almacenar datos del usuario en localStorage con rol por defecto "registrado"
+    const usuario = {
+      email: usuarioLogueado.email,
+      rol: perfilLogueado?.rol || "registrado",  // 🔹 Si no hay rol, asigna "registrado"
+      avatar: perfilLogueado?.avatar || "default.png"
+    };
+    console.log('Perfil localStorage:', usuario);
+    ls.setUsuario(usuario);
+
+    // 7️⃣ Redireccionar a la página de proyectos
+    window.location = '#/proyectos';
+
+    // 8️⃣ Actualizar el header según el rol
+    header.script();
+  } catch (error) {
+    console.error('Error al iniciar sesión:', error.message);
+    alert('El usuario no existe o la contraseña es incorrecta');
+  }
+}

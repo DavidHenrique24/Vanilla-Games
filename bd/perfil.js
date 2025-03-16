@@ -1,4 +1,3 @@
-
 // Importa el objeto 'supabase' desde un archivo 'supabase.js'
 import { supabase } from "./supabase.js";
 
